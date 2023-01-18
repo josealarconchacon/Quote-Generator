@@ -1,3 +1,4 @@
+// global variable
 let apiQuotes = [];
 
 // display new quote
