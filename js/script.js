@@ -1,3 +1,12 @@
+const container = document.getElementById("quote-container");
+const quoteTxt = document.getElementById("quote");
+const authorTxt = document.getElementById("author");
+const twitterButton = document.getElementById("twitter");
+const redditButton = document.getElementById("reddit");
+const facebookButton = document.getElementById("facebook");
+const linkedinButton = document.getElementById("linkedin");
+const newQuoteButton = document.getElementById("new-quote");
+
 // global variable
 let apiQuotes = [];
 
@@ -5,7 +14,16 @@ let apiQuotes = [];
 function newQuote() {
   // pick a random quote from apiQuotes array
   const quotes = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
-  console.log(quotes);
+
+  // check if author field is blank. If it's black, replace it with Unknown Author
+  !quotes.author
+    ? authorTxt.textContent == "Unknown Author"
+    : (authorTxt.textContent = quotes.author);
+
+  // applied .long-quote css class if the quote is to long
+  quotes.text.length > 120
+    ? quoteTxt.classList.add("long-quote")
+    : (quoteTxt.textContent = quotes.text);
 }
 
 // fetch quotes from api
