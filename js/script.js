@@ -38,5 +38,19 @@ async function fetchQuotes() {
   }
 }
 
+// tweet quote
+function tweetQuote() {
+  const url = `https://twitter.com/intent/tweet?text=${quoteTxt.textContent} - ${authorTxt.textContent}`;
+  openNewTab(url);
+}
+
+function openNewTab(url) {
+  window.open(url, "_blank");
+}
+
+// event listener
+newQuoteButton.addEventListener("click", newQuote);
+twitterButton.addEventListener("click", tweetQuote);
+
 // on load
 fetchQuotes();
