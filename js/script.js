@@ -6,12 +6,26 @@ const redditButton = document.getElementById("reddit");
 const facebookButton = document.getElementById("facebook");
 const linkedinButton = document.getElementById("linkedin");
 const newQuoteButton = document.getElementById("new-quote");
+const setLoader = document.getElementById("loader");
 
 // global variable
 let apiQuotes = [];
 
+// loader function to show that is loading
+function loading() {
+  setLoader.hidden = false;
+  container.hidden = true;
+}
+
+// hide loading
+function complete() {
+  container.hidden = false;
+  setLoader.hidden = true;
+}
+
 // display new quote
 function newQuote() {
+  loading();
   // pick a random quote from apiQuotes array
   const quotes = apiQuotes[Math.floor(Math.random() * apiQuotes.length)];
 
@@ -24,10 +38,14 @@ function newQuote() {
   quotes.text.length > 120
     ? quoteTxt.classList.add("long-quote")
     : (quoteTxt.textContent = quotes.text);
+
+  // set quote and hide loader
+  complete();
 }
 
 // fetch quotes from api
 async function fetchQuotes() {
+  loading();
   const url = "https://type.fit/api/quotes";
   try {
     const response = await fetch(url);
